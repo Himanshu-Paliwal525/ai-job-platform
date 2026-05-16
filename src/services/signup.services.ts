@@ -2,9 +2,9 @@ import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { CustomError } from "../utils/CustomError.js";
-export async function signupService(email: string, password: string) {
-    if (!email || !password) {
-        throw new CustomError("Email and password are required", 400);
+export async function signupService({ name, email, password }: { name: string, email: string, password: string }) {
+    if (!name || !email || !password) {
+        throw new CustomError("name, email and password are required", 400);
     }
 
     const exists = await User.findOne({ email });
@@ -16,6 +16,7 @@ export async function signupService(email: string, password: string) {
     const passwordHash = await bcrypt.hash(password, 12);
 
     const user = await User.create({
+        name,
         email,
         passwordHash,
     });

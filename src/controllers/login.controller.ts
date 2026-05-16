@@ -1,5 +1,5 @@
 import { type Request, type Response } from "express";
-import { loginService } from "../services/login.js";
+import { loginService } from "../services/login.services.js";
 import { CustomError } from "../utils/CustomError.js";
 export const loginController = async (req: Request, res: Response) => {
     try {

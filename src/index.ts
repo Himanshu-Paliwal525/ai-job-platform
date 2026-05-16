@@ -2,12 +2,16 @@ import dotenv from "dotenv";
 dotenv.config();
 import express, { type Request, type Response } from "express";
 import mongoose from "mongoose";
-import router from "./routes/auth.js";
+import router from "./routes/auth.routes.js";
 // import { redisClient } from "./worker/redisClient.ts";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-mongoose.connect(process.env.MONGODB_URI || "");
+mongoose.connect(process.env.MONGODB_URI || "").then(()=>{
+    console.log("Connected to MongoDB");
+}).catch((error)=>{
+    console.log("Error connecting to MongoDB:", error);
+});
 
 
 app.use(router);

@@ -1,11 +1,11 @@
 import { type Request, type Response } from "express";
-import { signupService } from "../services/signup.js";
+import { signupService } from "../services/signup.services.js";
 import { CustomError } from "../utils/CustomError.js";
 export const signupController = async (req: Request, res: Response) => {
     try {
-        const { email, password } = req.body;
+        const { name, email, password } = req.body;
 
-        const result = await signupService(email, password);
+        const result = await signupService({ name, email, password });
 
         res.cookie("refreshToken", result.refreshToken, {
             httpOnly: true,

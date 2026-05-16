@@ -9,6 +9,7 @@ const User = new mongoose.Schema({
         index: true,
     },
     passwordHash: { type: String, required: true, select: false },
+    name: { type: String, required: true, trim: true },
     createdAt: { type: Date, default: Date.now },
     refreshTokenHash: { type: String, select: false },
 });
