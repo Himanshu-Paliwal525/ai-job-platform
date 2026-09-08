@@ -38,7 +38,7 @@ export async function signupService(email: string, password: string) {
     );
 
     return {
-        accessToken,
+        token: accessToken,
         refreshToken,
     };
 }
