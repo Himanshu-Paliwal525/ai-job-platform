@@ -3,7 +3,7 @@ import { signupController } from "../controllers/signup.controller.js";
 import { loginController } from "../controllers/login.controller.js";
 
 
-const router = Router();
-router.post("/signup", signupController)
-router.post("/login", loginController)
-export default router;
+const authRouter = Router();
+authRouter.post("/signup", signupController)
+authRouter.post("/login", loginController)
+export default authRouter;

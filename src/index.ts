@@ -2,7 +2,9 @@ import dotenv from "dotenv";
 dotenv.config();
 import express, { type Request, type Response } from "express";
 import mongoose from "mongoose";
-import router from "./routes/auth.js";
+import authRouter from "./routes/auth.routes.js";
+import profileRouter from "./routes/profile.routes.js";
+
 // import { redisClient } from "./worker/redisClient.ts";
 const app = express();
 app.use(express.json());
@@ -10,7 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 mongoose.connect(process.env.MONGODB_URI || "");
 
 
-app.use(router);
+app.use(authRouter);
+app.use(profileRouter)
 
 app.get('/', (req: Request, res: Response) => {
     res.json({ message: "Hello World!" });

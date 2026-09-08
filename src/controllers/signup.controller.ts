@@ -15,7 +15,7 @@ export const signupController = async (req: Request, res: Response) => {
         });
 
         return res.status(201).json({
-            accessToken: result.accessToken,
+            token: result.token,
         });
     } catch (error : any) {
         if(error instanceof CustomError){
