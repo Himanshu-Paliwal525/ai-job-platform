@@ -1,5 +1,5 @@
 import { type Request, type Response } from "express";
-import { loginService } from "../services/login.js";
+import { loginService } from "../services/login.services.js";
 import { CustomError } from "../utils/CustomError.js";
 export const loginController = async (req: Request, res: Response) => {
     try {
@@ -7,7 +7,7 @@ export const loginController = async (req: Request, res: Response) => {
         const { token, refreshToken } = await loginService({ email, password });
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: false,
+            secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });

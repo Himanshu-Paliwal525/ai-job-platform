@@ -19,7 +19,7 @@ export async function loginService({ email, password }: { email: string, passwor
     }
 
     const token = jwt.sign({ id: user._id }, accessTokenSecret, {
-        expiresIn: "1h",
+        expiresIn: "15m",
     });
     const refreshToken = jwt.sign({ id: user._id }, refreshTokenSecret, {
         expiresIn: "7d",
