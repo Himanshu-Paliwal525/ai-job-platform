@@ -11,11 +11,7 @@ export const JobsMiddleware = async (req: Request, res: Response, next: NextFunc
         (req as any).job = job;
         next();
     } catch (error) {
-        if (error instanceof CustomError) {
-            res.status(error.statusCode).json({ message: error.message });
-        } else {
-            res.status(500).json({ message: "Internal Server Error" });
-        }
+        next(error);
     }
 
 }

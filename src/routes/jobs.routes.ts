@@ -9,11 +9,11 @@ import {
 } from "../controllers/jobs.controller.js";
 import { JobsMiddleware } from "../middleware/jobs.middleware.js";
 
-const router = Router();
+const jobsRouter = Router();
 
-router.post("/jobs", routesMiddleware, createJobController);
-router.get("/jobs/:id", routesMiddleware, JobsMiddleware, fetchJobController);
-router.get("/jobs/:id/status", routesMiddleware, JobsMiddleware, fetchJobStatusController);
-router.get("/jobs", routesMiddleware, fetchAllJobsController);
+jobsRouter.post("/jobs", routesMiddleware, createJobController);
+jobsRouter.get("/jobs/:id", routesMiddleware, JobsMiddleware, fetchJobController);
+jobsRouter.get("/jobs/:id/status", routesMiddleware, JobsMiddleware, fetchJobStatusController);
+jobsRouter.get("/jobs", routesMiddleware, fetchAllJobsController);
 
-export default router;
+export default jobsRouter;
