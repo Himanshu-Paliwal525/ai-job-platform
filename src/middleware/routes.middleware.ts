@@ -18,10 +18,6 @@ export const routesMiddleware = async (req: Request, res: Response, next: NextFu
         next();
 
     } catch (error: any) {
-        if (error instanceof CustomError) {
-            res.status(error.statusCode).json({ message: error.message });
-        } else {
-            res.status(401).json({ message: "Invalid or Expired token" });
-        }
+       next(error);
     }
 }

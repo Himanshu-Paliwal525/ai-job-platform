@@ -4,6 +4,8 @@ import express, { type Request, type Response } from "express";
 import mongoose from "mongoose";
 import authRouter from "./routes/auth.routes.js";
 import profileRouter from "./routes/profile.routes.js";
+import { CustomError } from "./utils/CustomError.js";
+import jobsRouter from "./routes/jobs.routes.js";
 
 // import { redisClient } from "./worker/redisClient.ts";
 const app = express();
@@ -13,7 +15,15 @@ mongoose.connect(process.env.MONGODB_URI || "");
 
 
 app.use(authRouter);
-app.use(profileRouter)
+app.use(profileRouter);
+app.use(jobsRouter);
+app.use(({ error }: { error: Error }, req: Request, res: Response) => {
+    if (error instanceof CustomError) {
+        res.status(error.statusCode).json({ message: error.message });
+    } else {
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+})
 
 app.get('/', (req: Request, res: Response) => {
     res.json({ message: "Hello World!" });
